@@ -1,0 +1,123 @@
+// Variables
+$blue : #2d67c4
+
+// Styles
+html,
+body
+  align-items: center
+  background: #2d67c4
+  box-sizing: border-box
+  color: #333
+  display: flex
+  flex-direction: column
+  font-family: Lato, Arial
+  font-size: 18px
+  justify-content: center
+  line-height: 1.5
+  margin: 0
+  padding: 0
+
+  *
+    box-sizing: border-box
+
+.header
+  color: #fff
+  padding: 40px
+  text-align: center
+
+  h1
+    font-weight: 900
+    font-size: 60px
+    margin-bottom: 0
+    line-height: 1
+
+  .tagline
+    font-size: 14px
+    text-transform: uppercase
+
+.section
+  background: #fff
+  max-width: 800px
+  padding: 20px 80px
+  width: 100%
+  margin-bottom: 20px
+  text-align: center
+
+.body
+  position: relative
+  min-height: 200px
+
+img
+  max-width: 100%
+  opacity: 0
+  transition: all 0.5s ease-in
+
+  &.fade-in
+    opacity: 1
+
+.controls
+  border-bottom: 5px solid #e2e2e2
+  display: flex
+  justify-content: center
+  margin-bottom: 10px
+  margin-bottom: 30px
+  padding-bottom: 30px
+  text-align: center
+  width: 100%
+
+button
+  font-size: 16px
+  border: 3px solid $blue
+  padding: 0.6em 1em
+  text-transform: uppercase
+  letter-spacing: 0.2em
+  border-radius: 12px
+  font-weight: bold
+  font-size: 14px
+  background: #fff
+  margin: 0 10px
+  cursor: pointer
+  transition: all 0.1s ease-in
+
+  &:hover
+    color: #fff
+    background: $blue
+
+  &:first-child
+    margin-left: 0
+
+  &:last-child
+    margin-right: 0
+
+.preloader
+  animation-iteration-count: 1
+  animation: pulsate 1.5s ease-out
+  border-radius: 30px
+  background: #00e
+  height: 20px
+  left: 50%
+  opacity: 0.0
+  position: absolute
+  top: 50%
+  transform: scale(0.0)
+  transition: all 0.1s ease-in
+  width: 20px
+
+  &.middle
+    margin-top: -10px
+
+  &.ensure-animation-loaded
+    background: #e00
+
+
+@keyframes pulsate
+  0%
+    opacity: 0.0
+    transform: scale(0.0)
+
+  70%
+    opacity: 1.0
+
+  100%
+    opacity: 0.0
+    transform: scale(1.5)
