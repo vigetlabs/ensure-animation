@@ -8,7 +8,7 @@
     "start": "webpack src/demo/demo.js example/demo.js & npm run sass && npm run watch",
     "sass": "node-sass src/demo/demo.sass example/demo.css -i",
     "watch": "node-sass src/demo/demo.sass example/demo.css -i -w & webpack src/demo/demo.js example/demo.js --watch & browser-sync start --server example --files 'example/*, index.html'",
-    "prepublish": "NODE_ENV=production rm -rf dist && babel src -d dist/ && webpack src dist/ensure-animation.min.js -p --output-library-target var --output-library ensure-animation"
+    "prepublish": "NODE_ENV=production rm -rf dist && babel src/ensure-animation -d dist/ensure-animation && webpack src/ensure-animation dist/ensure-animation/index.js -p --output-library-target var --output-library EnsureAnimation"
   },
   "repository": {
     "type": "git",
