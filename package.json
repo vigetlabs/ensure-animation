@@ -2,7 +2,7 @@
   "name": "ensure-animation",
   "version": "0.1.0",
   "description": "Ensuring animations run.",
-  "main": "dist/index.js",
+  "main": "dist/ensure-animation/index.js",
   "scripts": {
     "deploy": "NODE_ENV=production webpack src/demo/demo.js example/demo.js -p && npm run sass && gh-pages -d example -b gh-pages",
     "start": "webpack src/demo/demo.js example/demo.js & npm run sass && npm run watch",
