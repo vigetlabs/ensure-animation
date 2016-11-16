@@ -12,7 +12,6 @@ Continue playing loading animation until...
 
 ## Usage
 ```html
-
 <figure>
     <img src="" alt="" class="hero lazyload">
     <div class="preloader" data-ensure-target=".hero" data-ensure-ending-class=".loaded"></div>
@@ -40,15 +39,10 @@ preload.finish()
 preload.restart()
 
 // Making an ajax call
-preload.restart()
 axios.get('/user?id=1')
   .then(function(response) {
-    // Returns a promise when animation is complete
     preload.finish().then(function(){
        console.log(response)
     })
   })
 ```
-
-
-##
