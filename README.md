@@ -2,47 +2,80 @@
 A simple JS module to ensure a CSS animation plays continuously through to the end animation frame.
 
 ## Use Case
-Continue playing loading animation until...
-* A lazy loaded image has been loaded
-* A user has clicked on a notification
-* A "load more" ajax request has been completed
+Continue playing loading animation until a:
+* Lazy loaded image is loaded
+* User has clicked on a notification
+* "Load more" ajax request has been completed
+* Chain multiple animations to fire sequentially
 
 ## Install
-`npm install ensure-animation --save`
-
-## Usage
-```html
-<figure>
-    <img src="" alt="" class="hero lazyload">
-    <div class="preloader" data-ensure-target=".hero" data-ensure-ending-class=".loaded"></div>
-</figure>
+```bash
+npm install ensure-animation --save
 ```
 
+## Usage
+Given the following markup.
+```html
+<figure>
+  <img src="" alt="" class="hero lazyload">
+  <div class="preloader" data-ensure-target=".hero" data-ensure-ending-selector=".loaded"></div>
+</figure>
+```
+Import EnsureAnimation for use in your JS.
 ```js
 import EnsureAnimation from 'ensure-animation'
+```
 
-var preloader = document.querySelector('.preloader')
-new EnsureAnimation(preloader)
+## Assuming there is only a single node
+```js
+const preload = new EnsureAnimation('.preloader')
+// preload.length == 1
+```
 
-// Pass multiple instances
-var preloaders = document.querySelectorAll('.preloaders')
-new EnsureAnimation(preloaders)
+## Multiple node instances
+```js
+new EnsureAnimation('.preloaders')
+// preload.length == multiple
+```
 
-// Manually stop
-var preloader = document.querySelector('.preloader')
-var preload = new EnsureAnimation(preloader)
-
-// Manually finish the animations
+## Stop single instance
+```js
+const preload = new EnsureAnimation('.preloader')
 preload.finish()
+```
 
-// Manually restart the animations
+## Restart the animation
+```js
 preload.restart()
+```
 
-// Making an ajax call
-axios.get('/user?id=1')
+## Stop all instances
+```js
+const preloaders = new EnsureAnimation('.preloader')
+preloaders.each((preloader) => preloader.finish())
+```
+
+## Custom options
+```js
+const preloaders = new EnsureAnimation('.preloader', {
+  // target received this class upon finished animation
+  finish : 'custom-finished-class',
+
+  // targets' class signaling animation should finish
+  until  : 'has-been-loaded',
+
+  // target to watch for class to be applied
+  target  : '.hero-image'
+})
+```
+
+## Making an ajax call
+```js
+const preloader = new EnsureAnimation('.preloader')
+axios.get('api/users/1')
   .then(function(response) {
     preload.finish().then(function(){
-       console.log(response)
+      console.log(response)
     })
   })
 ```

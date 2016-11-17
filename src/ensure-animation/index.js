@@ -1,13 +1,13 @@
 import ee from 'event-emitter'
 var emitter = ee({})
 
-var whichAnimationEvent = () => {
+const whichAnimationEvent = () => {
   let el = document.createElement('fakeelement')
   let animations = {
-    'animation'      : 'animationend',
-    'OAnimation'     : 'oAnimationEnd',
-    'MozAnimation'   : 'animationend',
-    'WebkitAnimation': 'webkitAnimationEnd'
+    'animation'       : 'animationend',
+    'OAnimation'      : 'oAnimationEnd',
+    'MozAnimation'    : 'animationend',
+    'WebkitAnimation' : 'webkitAnimationEnd'
   }
 
   for (let t in animations){
@@ -19,9 +19,9 @@ var whichAnimationEvent = () => {
 
 const animationEvent = whichAnimationEvent()
 const defaults = {
-  finish   : null,
-  watchFor : null,
-  target   : null
+  finish : null,
+  until  : null,
+  target : null
 }
 
 class Ensure {
@@ -36,21 +36,17 @@ class Ensure {
   setup() {
     this.state = {}
 
-    let target = this.props.target ?
-      document.querySelector(this.props.target) :
-      document.querySelector(this.el.getAttribute('data-ensure-target'))
-
-    let trigger = this.props.watchFor ?
-      this.props.watchFor :
-      (this.el.getAttribute('data-ensure-watch-for') ? this.el.getAttribute('data-ensure-watch-for') : 'ensure-animation-loaded')
+    let trigger = this.props.until ?
+      this.props.until :
+      (this.el.getAttribute('data-ensure-until') ? this.el.getAttribute('data-ensure-until') : 'ensure-animation-loaded')
 
     let finish = this.props.finish ?
       this.props.finish :
       (this.el.getAttribute('data-ensure-finish-class') ? this.el.getAttribute('data-ensure-finish-class') : 'ensure-target-finished')
 
-    this.state.target   = target
-    this.state.watchFor = trigger
-    this.state.finish   = finish
+    this.state.target = target
+    this.state.until  = trigger
+    this.state.finish = finish
   }
 
   reset() {
@@ -66,7 +62,7 @@ class Ensure {
     // Remove loaded classname
     let classList = this.el.classList
     let targetClassList = this.state.target.classList
-    targetClassList.remove(this.state.watchFor)
+    targetClassList.remove(this.state.until)
 
     // Force redraw
     let classes = classList.toString().split(' ')
@@ -84,7 +80,7 @@ class Ensure {
     this.el.addEventListener(animationEvent, this.checkReference, false)
   }
 
-  finish(cb) {
+  finish() {
     return new Promise((resolve) => {
       this.shouldRun = false
 
@@ -106,7 +102,7 @@ class Ensure {
       return
     }
 
-    let containsEndingClass = this.state.target.classList.contains(this.state.watchFor)
+    let containsEndingClass = this.state.target.classList.contains(this.state.until)
 
     if (containsEndingClass) {
       this.stop()
