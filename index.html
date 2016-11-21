@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ensure Animation</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Ensure Animation</h1>
+    <p class="tagline">Preventing animations from halting half-way, since 2016</p>
+  </header>
+  <section class="section e1">
+    <h2>Manual Control</h2>
+    <div class="controls">
+      <button class="e1-button" data-finish="true">Finish</button>
+      <button class="e1-button" data-restart="true">Restart</button>
+      <button class="e1-button" data-callback="true">Event on Finish</button>
+    </div>
+    <div class="body">
+      <div class="e1-content">
+      </div>
+      <div id="e1-preloader" class="preloader" data-ensure-target="#e1-preloader" data-ensure-until="loaded"></div>
+    </div>
+  </section>
+
+  <section class="section e2">
+    <h2>Lazyloaded Images</h2>
+    <div class="body">
+      <img data-src="https://images.unsplash.com/photo-1465447142348-e9952c393450?dpr=2&auto=compress,format&crop=entropy&fit=crop&w=1199&h=899&q=80&cs=tinysrgb" alt="" class="e2-image lazyload">
+      <div id="e2-preloader" class="preloader" data-ensure-target=".e2-image" data-ensure-until="lazyloaded" data-ensure-finish-class="fade-in"></div>
+    </div>
+  </section>
+
+  <section class="section e3">
+    <h2>Ajax Preloader</h2>
+    <div class="controls">
+      <button class="e3-button">Load Ajax Content</button>
+    </div>
+    <div class="body">
+      <div class="e3-content"></div>
+      <div id="e3-preloader" class="preloader" data-ensure-target=".e3-content"></div>
+    </div>
+  </section>
+
+  <script src="demo.js"></script>
+</body>
+</html>
