@@ -92,6 +92,8 @@ button {
   transform: scale(0);
   transition: all 0.1s ease-in;
   width: 20px; }
+  .preloader.-t {
+    animation-iteration-count: infinite; }
   .preloader.middle {
     margin-top: -10px; }
   .preloader.ensure-animation-loaded {
