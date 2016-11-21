@@ -1,10 +1,10 @@
 import EnsureAnimation from '../ensure-animation'
 import 'lazysizes'
 
-// Example One
-const e1_preloader = new EnsureAnimation('#e1-preloader')
-const e1_buttons = document.querySelectorAll('.e1-button')
-const e1_content = document.querySelector('.e1-content')
+// example one
+const e1_preloader = new EnsureAnimation('#e1-preloader')[0]
+const e1_buttons   = document.querySelectorAll('.e1-button')
+const e1_content   = document.querySelector('.e1-content')
 
 for (let i = 0; i < e1_buttons.length; i++) {
   e1_buttons[i].addEventListener('click', function(){
@@ -26,11 +26,11 @@ for (let i = 0; i < e1_buttons.length; i++) {
   })
 }
 
-// Example Two
-const e2_preloader = new EnsureAnimation('#e2-preloader')
+// example two
+const e2_preloader = new EnsureAnimation('#e2-preloader')[0]
 
-// Example Three
-const e3_preloader = new EnsureAnimation('#e3-preloader')
+// example three
+const e3_preloader = new EnsureAnimation('#e3-preloader')[0]
 const e3_button    = document.querySelector('.e3-button')
 const e3_content   = document.querySelector('.e3-content')
 

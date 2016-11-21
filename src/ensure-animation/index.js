@@ -34,19 +34,16 @@ class Ensure {
   }
 
   setup() {
-    this.state = {}
+    let p  = this.props
+    let finish  = p.finish ? p.finish : (this.el.getAttribute('data-ensure-finish-class') ? this.el.getAttribute('data-ensure-finish-class') : 'ensure-target-finished')
+    let target  = p.target ? p.target : (this.el.getAttribute('data-ensure-target') ? document.querySelectorAll(this.el.getAttribute('data-ensure-target'))[0] : this.el)
+    let until = p.until  ? p.until  : (this.el.getAttribute('data-ensure-until') ? this.el.getAttribute('data-ensure-until') : 'ensure-animation-loaded')
 
-    let trigger = this.props.until ?
-      this.props.until :
-      (this.el.getAttribute('data-ensure-until') ? this.el.getAttribute('data-ensure-until') : 'ensure-animation-loaded')
-
-    let finish = this.props.finish ?
-      this.props.finish :
-      (this.el.getAttribute('data-ensure-finish-class') ? this.el.getAttribute('data-ensure-finish-class') : 'ensure-target-finished')
-
-    this.state.target = target
-    this.state.until  = trigger
-    this.state.finish = finish
+    this.state = {
+      finish,
+      target,
+      until,
+    }
   }
 
   reset() {
@@ -90,22 +87,25 @@ class Ensure {
   }
 
   continueChecking() {
-    if ( ! this.isFinished && ! this.shouldRun) {
+    // If it should run and not finished, keep checking for ending class
+    let containsEndingClass = this.state.target.classList.contains(this.state.until)
+    if (containsEndingClass) {
+      this.stop()
+      emitter.emit('finished')
+    }
+
+    if ( ! this.shouldRun) {
       this.isFinished = true
-      this.shouldRun  = false
 
       if (this.state.finish) {
         this.state.target.classList.add(this.state.finish)
       }
 
-      emitter.emit('finished')
-      return
-    }
+      if (this.isFinished) {
+        this.isFinished = false
+        emitter.emit('finished')
+      }
 
-    let containsEndingClass = this.state.target.classList.contains(this.state.until)
-
-    if (containsEndingClass) {
-      this.stop()
       return
     }
 
@@ -119,7 +119,7 @@ class Ensure {
   }
 }
 
-var EnsureAnimation = class {
+export default class EnsureAnimation {
   constructor(selector, options) {
     const animations = document.querySelectorAll(selector)
     let instances = []
@@ -128,10 +128,6 @@ var EnsureAnimation = class {
       instances.push(new Ensure(animations[i], options))
     }
 
-    if (instances.length < 2) return instances[0]
-
     return instances
   }
 }
-
-export default EnsureAnimation
