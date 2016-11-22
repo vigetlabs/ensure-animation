@@ -48,9 +48,10 @@ class Ensure {
 
   reset() {
     this.iterations = 1
-    this.el.style.animationIterationCount = 1
-    this.shouldRun = true
+    this.shouldRun  = true
     this.isFinished = false
+    this.isEmitted  = false
+    this.el.style.animationIterationCount = 1
     this.checkReference = this.continueChecking.bind(this)
     this.el.removeEventListener(animationEvent, this.checkReference, false)
   }
@@ -82,7 +83,10 @@ class Ensure {
       this.shouldRun = false
 
       // Listen for finished
-      emitter.on('finished', resolve)
+      if ( ! this.isEmitted) {
+        this.isEmitted = true
+        emitter.on('finished', resolve)
+      }
     })
   }
 

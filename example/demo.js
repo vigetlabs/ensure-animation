@@ -1,2 +1,1370 @@
-!function(t){function e(i){if(n[i])return n[i].exports;var r=n[i]={exports:{},id:i,loaded:!1};return t[i].call(r.exports,r,r.exports,e),r.loaded=!0,r.exports}var n={};return e.m=t,e.c=n,e.p="",e(0)}([function(t,e,n){"use strict";function i(t){return t&&t.__esModule?t:{"default":t}}var r=n(1),s=i(r);n(17);for(var a=new s["default"]("#e1-preloader")[0],o=document.querySelectorAll(".e1-button"),c=document.querySelector(".e1-content"),u=function(t){o[t].addEventListener("click",function(){var e=o[t].getAttribute("data-finish"),n=o[t].getAttribute("data-restart"),i=o[t].getAttribute("data-callback");n&&a.restart(),e&&a.finish(),i&&a.finish().then(function(){c.innerHTML+="Animation completed, text appended<br>"})})},l=0;l<o.length;l++)u(l);var f=(new s["default"]("#e2-preloader")[0],new s["default"]("#e3-preloader")[0]),d=document.querySelector(".e3-button"),h=document.querySelector(".e3-content");d.addEventListener("click",function(){var t=new XMLHttpRequest;t.onreadystatechange=function(){var t=this;4==this.readyState&&200==this.status&&!function(){var e=t.responseText;f.finish().then(function(){h.innerHTML=e})}()},t.open("GET","https://static.viget.com/content.txt",!0),t.send()},!1)},function(t,e,n){"use strict";function i(t){return t&&t.__esModule?t:{"default":t}}function r(t){if(Array.isArray(t)){for(var e=0,n=Array(t.length);e<t.length;e++)n[e]=t[e];return n}return Array.from(t)}function s(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(e,"__esModule",{value:!0});var a=Object.assign||function(t){for(var e=1;e<arguments.length;e++){var n=arguments[e];for(var i in n)Object.prototype.hasOwnProperty.call(n,i)&&(t[i]=n[i])}return t},o=function(){function t(t,e){for(var n=0;n<e.length;n++){var i=e[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(t,i.key,i)}}return function(e,n,i){return n&&t(e.prototype,n),i&&t(e,i),e}}(),c=n(16),u=i(c),l=(0,u["default"])({}),f=function(){var t=document.createElement("fakeelement"),e={animation:"animationend",OAnimation:"oAnimationEnd",MozAnimation:"animationend",WebkitAnimation:"webkitAnimationEnd"};for(var n in e)if(void 0!==t.style[n])return e[n]},d=f(),h={finish:null,until:null,target:null},v=function(){function t(e){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};s(this,t),this.el=e,this.props=a({},h,n),this.setup(),this.reset(),this.check()}return o(t,[{key:"setup",value:function(){var t=this.props,e=t.finish?t.finish:this.el.getAttribute("data-ensure-finish-class")?this.el.getAttribute("data-ensure-finish-class"):"ensure-target-finished",n=t.target?t.target:this.el.getAttribute("data-ensure-target")?document.querySelectorAll(this.el.getAttribute("data-ensure-target"))[0]:this.el,i=t.until?t.until:this.el.getAttribute("data-ensure-until")?this.el.getAttribute("data-ensure-until"):"ensure-animation-loaded";this.state={finish:e,target:n,until:i}}},{key:"reset",value:function(){this.iterations=1,this.el.style.animationIterationCount=1,this.shouldRun=!0,this.isFinished=!1,this.checkReference=this.continueChecking.bind(this),this.el.removeEventListener(d,this.checkReference,!1)}},{key:"restart",value:function(){var t=this.el.classList,e=this.state.target.classList;e.remove(this.state.until);var n=t.toString().split(" ");t.remove.apply(t,r(n)),void this.el.offsetWidth,t.add.apply(t,r(n)),this.el.removeEventListener(d,this.checkReference,!1),this.reset(),this.check()}},{key:"check",value:function(){this.el.addEventListener(d,this.checkReference,!1)}},{key:"finish",value:function(){var t=this;return new Promise(function(e){t.shouldRun=!1,l.on("finished",e)})}},{key:"continueChecking",value:function(){var t=this.state.target.classList.contains(this.state.until);return t&&(this.stop(),l.emit("finished")),this.shouldRun?(this.iterations+=1,void(this.el.style.animationIterationCount=this.iterations)):(this.isFinished=!0,this.state.finish&&this.state.target.classList.add(this.state.finish),void(this.isFinished&&(this.isFinished=!1,l.emit("finished"))))}},{key:"stop",value:function(){this.shouldRun=!1,this.el.removeEventListener(d,this.checkReference,!1)}}]),t}(),p=function y(t,e){s(this,y);for(var n=document.querySelectorAll(t),i=[],r=0;r<n.length;r++)i.push(new v(n[r],e));return i};e["default"]=p},function(t,e,n){"use strict";var i,r=n(3),s=n(10),a=n(6),o=n(13);i=t.exports=function(t,e){var n,i,a,c,u;return arguments.length<2||"string"!=typeof t?(c=e,e=t,t=null):c=arguments[2],null==t?(n=a=!0,i=!1):(n=o.call(t,"c"),i=o.call(t,"e"),a=o.call(t,"w")),u={value:e,configurable:n,enumerable:i,writable:a},c?r(s(c),u):u},i.gs=function(t,e,n){var i,c,u,l;return"string"!=typeof t?(u=n,n=e,e=t,t=null):u=arguments[3],null==e?e=void 0:a(e)?null==n?n=void 0:a(n)||(u=n,n=void 0):(u=e,e=n=void 0),null==t?(i=!0,c=!1):(i=o.call(t,"c"),c=o.call(t,"e")),l={get:e,set:n,configurable:i,enumerable:c},u?r(s(u),l):l}},function(t,e,n){"use strict";t.exports=n(4)()?Object.assign:n(5)},function(t,e){"use strict";t.exports=function(){var t,e=Object.assign;return"function"==typeof e&&(t={foo:"raz"},e(t,{bar:"dwa"},{trzy:"trzy"}),t.foo+t.bar+t.trzy==="razdwatrzy")}},function(t,e,n){"use strict";var i=n(7),r=n(12),s=Math.max;t.exports=function(t,e){var n,a,o,c=s(arguments.length,2);for(t=Object(r(t)),o=function(i){try{t[i]=e[i]}catch(r){n||(n=r)}},a=1;a<c;++a)e=arguments[a],i(e).forEach(o);if(void 0!==n)throw n;return t}},function(t,e){"use strict";t.exports=function(t){return"function"==typeof t}},function(t,e,n){"use strict";t.exports=n(8)()?Object.keys:n(9)},function(t,e){"use strict";t.exports=function(){try{return Object.keys("primitive"),!0}catch(t){return!1}}},function(t,e){"use strict";var n=Object.keys;t.exports=function(t){return n(null==t?t:Object(t))}},function(t,e){"use strict";var n=Array.prototype.forEach,i=Object.create,r=function(t,e){var n;for(n in t)e[n]=t[n]};t.exports=function(t){var e=i(null);return n.call(arguments,function(t){null!=t&&r(Object(t),e)}),e}},function(t,e){"use strict";t.exports=function(t){if("function"!=typeof t)throw new TypeError(t+" is not a function");return t}},function(t,e){"use strict";t.exports=function(t){if(null==t)throw new TypeError("Cannot use null or undefined");return t}},function(t,e,n){"use strict";t.exports=n(14)()?String.prototype.contains:n(15)},function(t,e){"use strict";var n="razdwatrzy";t.exports=function(){return"function"==typeof n.contains&&(n.contains("dwa")===!0&&n.contains("foo")===!1)}},function(t,e){"use strict";var n=String.prototype.indexOf;t.exports=function(t){return n.call(this,t,arguments[1])>-1}},function(t,e,n){"use strict";var i,r,s,a,o,c,u,l=n(2),f=n(11),d=Function.prototype.apply,h=Function.prototype.call,v=Object.create,p=Object.defineProperty,y=Object.defineProperties,g=Object.prototype.hasOwnProperty,m={configurable:!0,enumerable:!1,writable:!0};i=function(t,e){var n;return f(e),g.call(this,"__ee__")?n=this.__ee__:(n=m.value=v(null),p(this,"__ee__",m),m.value=null),n[t]?"object"==typeof n[t]?n[t].push(e):n[t]=[n[t],e]:n[t]=e,this},r=function(t,e){var n,r;return f(e),r=this,i.call(this,t,n=function(){s.call(r,t,n),d.call(e,this,arguments)}),n.__eeOnceListener__=e,this},s=function(t,e){var n,i,r,s;if(f(e),!g.call(this,"__ee__"))return this;if(n=this.__ee__,!n[t])return this;if(i=n[t],"object"==typeof i)for(s=0;r=i[s];++s)r!==e&&r.__eeOnceListener__!==e||(2===i.length?n[t]=i[s?0:1]:i.splice(s,1));else i!==e&&i.__eeOnceListener__!==e||delete n[t];return this},a=function(t){var e,n,i,r,s;if(g.call(this,"__ee__")&&(r=this.__ee__[t]))if("object"==typeof r){for(n=arguments.length,s=new Array(n-1),e=1;e<n;++e)s[e-1]=arguments[e];for(r=r.slice(),e=0;i=r[e];++e)d.call(i,this,s)}else switch(arguments.length){case 1:h.call(r,this);break;case 2:h.call(r,this,arguments[1]);break;case 3:h.call(r,this,arguments[1],arguments[2]);break;default:for(n=arguments.length,s=new Array(n-1),e=1;e<n;++e)s[e-1]=arguments[e];d.call(r,this,s)}},o={on:i,once:r,off:s,emit:a},c={on:l(i),once:l(r),off:l(s),emit:l(a)},u=y({},c),t.exports=e=function(t){return null==t?v(u):y(Object(t),c)},e.methods=o},function(t,e){!function(e,n){var i=n(e,e.document);e.lazySizes=i,"object"==typeof t&&t.exports&&(t.exports=i)}(window,function(t,e){"use strict";if(e.getElementsByClassName){var n,i=e.documentElement,r=t.Date,s=t.HTMLPictureElement,a="addEventListener",o="getAttribute",c=t[a],u=t.setTimeout,l=t.requestAnimationFrame||u,f=t.requestIdleCallback,d=/^picture$/i,h=["load","error","lazyincluded","_lazyloaded"],v={},p=Array.prototype.forEach,y=function(t,e){return v[e]||(v[e]=new RegExp("(\\s|^)"+e+"(\\s|$)")),v[e].test(t[o]("class")||"")&&v[e]},g=function(t,e){y(t,e)||t.setAttribute("class",(t[o]("class")||"").trim()+" "+e)},m=function(t,e){var n;(n=y(t,e))&&t.setAttribute("class",(t[o]("class")||"").replace(n," "))},b=function(t,e,n){var i=n?a:"removeEventListener";n&&b(t,e),h.forEach(function(n){t[i](n,e)})},z=function(t,n,i,r,s){var a=e.createEvent("CustomEvent");return a.initCustomEvent(n,!r,!s,i||{}),t.dispatchEvent(a),a},_=function(e,i){var r;!s&&(r=t.picturefill||n.pf)?r({reevaluate:!0,elements:[e]}):i&&i.src&&(e.src=i.src)},A=function(t,e){return(getComputedStyle(t,null)||{})[e]},w=function(t,e,i){for(i=i||t.offsetWidth;i<n.minSize&&e&&!t._lazysizesWidth;)i=e.offsetWidth,e=e.parentNode;return i},C=function(){var t,n,i=[],r=function(){var e;for(t=!0,n=!1;i.length;)e=i.shift(),e[0].apply(e[1],e[2]);t=!1};return function(s){t?s.apply(this,arguments):(i.push([s,this,arguments]),n||(n=!0,(e.hidden?u:l)(r)))}}(),E=function(t,e){return e?function(){C(t)}:function(){var e=this,n=arguments;C(function(){t.apply(e,n)})}},k=function(t){var e,n=0,i=125,s=999,a=s,o=function(){e=!1,n=r.now(),t()},c=f?function(){f(o,{timeout:a}),a!==s&&(a=s)}:E(function(){u(o)},!0);return function(t){var s;(t=t===!0)&&(a=66),e||(e=!0,s=i-(r.now()-n),s<0&&(s=0),t||s<9&&f?c():u(c,s))}},x=function(t){var e,n,i=99,s=function(){e=null,t()},a=function(){var t=r.now()-n;t<i?u(a,i-t):(f||s)(s)};return function(){n=r.now(),e||(e=u(a,i))}},O=function(){var s,l,f,h,v,w,O,M,j,S,R,N,F,P,T,W=/^img$/i,q=/^iframe$/i,B="onscroll"in t&&!/glebot/.test(navigator.userAgent),H=0,I=0,$=0,D=-1,G=function(t){$--,t&&t.target&&b(t.target,G),(!t||$<0||!t.target)&&($=0)},X=function(t,n){var r,s=t,a="hidden"==A(e.body,"visibility")||"hidden"!=A(t,"visibility");for(j-=n,N+=n,S-=n,R+=n;a&&(s=s.offsetParent)&&s!=e.body&&s!=i;)a=(A(s,"opacity")||1)>0,a&&"visible"!=A(s,"overflow")&&(r=s.getBoundingClientRect(),a=R>r.left&&S<r.right&&N>r.top-1&&j<r.bottom+1);return a},J=function(){var t,r,a,c,u,d,h,p,y;if((v=n.loadMode)&&$<8&&(t=s.length)){r=0,D++,null==P&&("expand"in n||(n.expand=i.clientHeight>500&&i.clientWidth>500?500:370),F=n.expand,P=F*n.expFactor),I<P&&$<1&&D>2&&v>2&&!e.hidden?(I=P,D=0):I=v>1&&D>1&&$<6?F:H;for(;r<t;r++)if(s[r]&&!s[r]._lazyRace)if(B)if((p=s[r][o]("data-expand"))&&(d=1*p)||(d=I),y!==d&&(O=innerWidth+d*T,M=innerHeight+d,h=d*-1,y=d),a=s[r].getBoundingClientRect(),(N=a.bottom)>=h&&(j=a.top)<=M&&(R=a.right)>=h*T&&(S=a.left)<=O&&(N||R||S||j)&&(f&&$<3&&!p&&(v<3||D<4)||X(s[r],d))){if(et(s[r]),u=!0,$>9)break}else!u&&f&&!c&&$<4&&D<4&&v>2&&(l[0]||n.preloadAfterLoad)&&(l[0]||!p&&(N||R||S||j||"auto"!=s[r][o](n.sizesAttr)))&&(c=l[0]||s[r]);else et(s[r]);c&&!u&&et(c)}},K=k(J),Q=function(t){g(t.target,n.loadedClass),m(t.target,n.loadingClass),b(t.target,V)},U=E(Q),V=function(t){U({target:t.target})},Y=function(t,e){try{t.contentWindow.location.replace(e)}catch(n){t.src=e}},Z=function(t){var e,i,r=t[o](n.srcsetAttr);(e=n.customMedia[t[o]("data-media")||t[o]("media")])&&t.setAttribute("media",e),r&&t.setAttribute("srcset",r),e&&(i=t.parentNode,i.insertBefore(t.cloneNode(),t),i.removeChild(t))},tt=E(function(t,e,i,r,s){var a,c,l,f,v,y;(v=z(t,"lazybeforeunveil",e)).defaultPrevented||(r&&(i?g(t,n.autosizesClass):t.setAttribute("sizes",r)),c=t[o](n.srcsetAttr),a=t[o](n.srcAttr),s&&(l=t.parentNode,f=l&&d.test(l.nodeName||"")),y=e.firesLoad||"src"in t&&(c||a||f),v={target:t},y&&(b(t,G,!0),clearTimeout(h),h=u(G,2500),g(t,n.loadingClass),b(t,V,!0)),f&&p.call(l.getElementsByTagName("source"),Z),c?t.setAttribute("srcset",c):a&&!f&&(q.test(t.nodeName)?Y(t,a):t.src=a),(c||f)&&_(t,{src:a})),C(function(){t._lazyRace&&delete t._lazyRace,m(t,n.lazyClass),y&&!t.complete||(y?G(v):$--,Q(v))})}),et=function(t){var e,i=W.test(t.nodeName),r=i&&(t[o](n.sizesAttr)||t[o]("sizes")),s="auto"==r;(!s&&f||!i||!t.src&&!t.srcset||t.complete||y(t,n.errorClass))&&(e=z(t,"lazyunveilread").detail,s&&L.updateElem(t,!0,t.offsetWidth),t._lazyRace=!0,$++,tt(t,e,s,r,i))},nt=function(){if(!f){if(r.now()-w<999)return void u(nt,999);var t=x(function(){n.loadMode=3,K()});f=!0,n.loadMode=3,K(),c("scroll",function(){3==n.loadMode&&(n.loadMode=2),t()},!0)}};return{_:function(){w=r.now(),s=e.getElementsByClassName(n.lazyClass),l=e.getElementsByClassName(n.lazyClass+" "+n.preloadClass),T=n.hFac,c("scroll",K,!0),c("resize",K,!0),t.MutationObserver?new MutationObserver(K).observe(i,{childList:!0,subtree:!0,attributes:!0}):(i[a]("DOMNodeInserted",K,!0),i[a]("DOMAttrModified",K,!0),setInterval(K,999)),c("hashchange",K,!0),["focus","mouseover","click","load","transitionend","animationend","webkitAnimationEnd"].forEach(function(t){e[a](t,K,!0)}),/d$|^c/.test(e.readyState)?nt():(c("load",nt),e[a]("DOMContentLoaded",K),u(nt,2e4)),K(s.length>0)},checkElems:K,unveil:et}}(),L=function(){var t,i=E(function(t,e,n,i){var r,s,a;if(t._lazysizesWidth=i,i+="px",t.setAttribute("sizes",i),d.test(e.nodeName||""))for(r=e.getElementsByTagName("source"),s=0,a=r.length;s<a;s++)r[s].setAttribute("sizes",i);n.detail.dataAttr||_(t,n.detail)}),r=function(t,e,n){var r,s=t.parentNode;s&&(n=w(t,s,n),r=z(t,"lazybeforesizes",{width:n,dataAttr:!!e}),r.defaultPrevented||(n=r.detail.width,n&&n!==t._lazysizesWidth&&i(t,s,r,n)))},s=function(){var e,n=t.length;if(n)for(e=0;e<n;e++)r(t[e])},a=x(s);return{_:function(){t=e.getElementsByClassName(n.autosizesClass),c("resize",a)},checkElems:a,updateElem:r}}(),M=function(){M.i||(M.i=!0,L._(),O._())};return function(){var e,i={lazyClass:"lazyload",loadedClass:"lazyloaded",loadingClass:"lazyloading",preloadClass:"lazypreload",errorClass:"lazyerror",autosizesClass:"lazyautosizes",srcAttr:"data-src",srcsetAttr:"data-srcset",sizesAttr:"data-sizes",minSize:40,customMedia:{},init:!0,expFactor:1.5,hFac:.8,loadMode:2};n=t.lazySizesConfig||t.lazysizesConfig||{};for(e in i)e in n||(n[e]=i[e]);t.lazySizesConfig=n,u(function(){n.init&&M()})}(),{cfg:n,autoSizer:L,loader:O,init:M,uP:_,aC:g,rC:m,hC:y,fire:z,gW:w,rAF:C}}})}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ensureAnimation = __webpack_require__(1);
+
+	var _ensureAnimation2 = _interopRequireDefault(_ensureAnimation);
+
+	__webpack_require__(17);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// example one
+	var e1_preloader = new _ensureAnimation2.default('#e1-preloader')[0];
+	var e1_buttons = document.querySelectorAll('.e1-button');
+	var e1_content = document.querySelector('.e1-content');
+
+	var _loop = function _loop(i) {
+	  e1_buttons[i].addEventListener('click', function () {
+	    var finish = e1_buttons[i].getAttribute('data-finish');
+	    var restart = e1_buttons[i].getAttribute('data-restart');
+	    var callback = e1_buttons[i].getAttribute('data-callback');
+
+	    if (restart) {
+	      e1_preloader.restart();
+	    }
+	    if (finish) {
+	      e1_preloader.finish();
+	    }
+	    if (callback) {
+	      e1_preloader.finish().then(function () {
+	        e1_content.innerHTML += 'Animation completed, text appended<br>';
+	      });
+	    }
+	  });
+	};
+
+	for (var i = 0; i < e1_buttons.length; i++) {
+	  _loop(i);
+	}
+
+	// example two
+	var e2_preloader = new _ensureAnimation2.default('#e2-preloader')[0];
+
+	// example three
+	var e3_preloader = new _ensureAnimation2.default('#e3-preloader')[0];
+	var e3_button = document.querySelector('.e3-button');
+	var e3_content = document.querySelector('.e3-content');
+
+	e3_button.addEventListener('click', function () {
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function () {
+	    var _this = this;
+
+	    if (this.readyState == 4 && this.status == 200) {
+	      (function () {
+	        var responseText = _this.responseText;
+	        e3_preloader.finish().then(function () {
+	          e3_content.innerHTML = responseText;
+	        });
+	      })();
+	    }
+	  };
+	  xhttp.open('GET', 'https://static.viget.com/content.txt', true);
+	  xhttp.send();
+	}, false);
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _eventEmitter = __webpack_require__(2);
+
+	var _eventEmitter2 = _interopRequireDefault(_eventEmitter);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var emitter = (0, _eventEmitter2.default)({});
+
+	var whichAnimationEvent = function whichAnimationEvent() {
+	  var el = document.createElement('fakeelement');
+	  var animations = {
+	    'animation': 'animationend',
+	    'OAnimation': 'oAnimationEnd',
+	    'MozAnimation': 'animationend',
+	    'WebkitAnimation': 'webkitAnimationEnd'
+	  };
+
+	  for (var t in animations) {
+	    if (el.style[t] !== undefined) {
+	      return animations[t];
+	    }
+	  }
+	};
+
+	var animationEvent = whichAnimationEvent();
+	var defaults = {
+	  finish: null,
+	  until: null,
+	  target: null
+	};
+
+	var Ensure = function () {
+	  function Ensure(el) {
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+	    _classCallCheck(this, Ensure);
+
+	    this.el = el;
+	    this.props = _extends({}, defaults, options);
+	    this.setup();
+	    this.reset();
+	    this.check();
+	  }
+
+	  _createClass(Ensure, [{
+	    key: 'setup',
+	    value: function setup() {
+	      var p = this.props;
+	      var finish = p.finish ? p.finish : this.el.getAttribute('data-ensure-finish-class') ? this.el.getAttribute('data-ensure-finish-class') : 'ensure-target-finished';
+	      var target = p.target ? p.target : this.el.getAttribute('data-ensure-target') ? document.querySelectorAll(this.el.getAttribute('data-ensure-target'))[0] : this.el;
+	      var until = p.until ? p.until : this.el.getAttribute('data-ensure-until') ? this.el.getAttribute('data-ensure-until') : 'ensure-animation-loaded';
+
+	      this.state = {
+	        finish: finish,
+	        target: target,
+	        until: until
+	      };
+	    }
+	  }, {
+	    key: 'reset',
+	    value: function reset() {
+	      this.iterations = 1;
+	      this.shouldRun = true;
+	      this.isFinished = false;
+	      this.isEmitted = false;
+	      this.el.style.animationIterationCount = 1;
+	      this.checkReference = this.continueChecking.bind(this);
+	      this.el.removeEventListener(animationEvent, this.checkReference, false);
+	    }
+	  }, {
+	    key: 'restart',
+	    value: function restart() {
+	      // Remove loaded classname
+	      var classList = this.el.classList;
+	      var targetClassList = this.state.target.classList;
+	      targetClassList.remove(this.state.until);
+
+	      // Force redraw
+	      var classes = classList.toString().split(' ');
+	      classList.remove.apply(classList, _toConsumableArray(classes));
+	      void this.el.offsetWidth;
+	      classList.add.apply(classList, _toConsumableArray(classes));
+
+	      this.el.removeEventListener(animationEvent, this.checkReference, false);
+
+	      this.reset();
+	      this.check();
+	    }
+	  }, {
+	    key: 'check',
+	    value: function check() {
+	      this.el.addEventListener(animationEvent, this.checkReference, false);
+	    }
+	  }, {
+	    key: 'finish',
+	    value: function finish() {
+	      var _this = this;
+
+	      return new Promise(function (resolve) {
+	        _this.shouldRun = false;
+
+	        // Listen for finished
+	        if (!_this.isEmitted) {
+	          _this.isEmitted = true;
+	          emitter.on('finished', resolve);
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'continueChecking',
+	    value: function continueChecking() {
+	      // If it should run and not finished, keep checking for ending class
+	      var containsEndingClass = this.state.target.classList.contains(this.state.until);
+	      if (containsEndingClass) {
+	        this.stop();
+	        emitter.emit('finished');
+	      }
+
+	      if (!this.shouldRun) {
+	        this.isFinished = true;
+
+	        if (this.state.finish) {
+	          this.state.target.classList.add(this.state.finish);
+	        }
+
+	        if (this.isFinished) {
+	          this.isFinished = false;
+	          emitter.emit('finished');
+	        }
+
+	        return;
+	      }
+
+	      this.iterations += 1;
+	      this.el.style.animationIterationCount = this.iterations;
+	    }
+	  }, {
+	    key: 'stop',
+	    value: function stop() {
+	      this.shouldRun = false;
+	      this.el.removeEventListener(animationEvent, this.checkReference, false);
+	    }
+	  }]);
+
+	  return Ensure;
+	}();
+
+	var EnsureAnimation = function EnsureAnimation(selector, options) {
+	  _classCallCheck(this, EnsureAnimation);
+
+	  var animations = document.querySelectorAll(selector);
+	  var instances = [];
+
+	  for (var i = 0; i < animations.length; i++) {
+	    instances.push(new Ensure(animations[i], options));
+	  }
+
+	  return instances;
+	};
+
+		exports.default = EnsureAnimation;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var d        = __webpack_require__(3)
+	  , callable = __webpack_require__(16)
+
+	  , apply = Function.prototype.apply, call = Function.prototype.call
+	  , create = Object.create, defineProperty = Object.defineProperty
+	  , defineProperties = Object.defineProperties
+	  , hasOwnProperty = Object.prototype.hasOwnProperty
+	  , descriptor = { configurable: true, enumerable: false, writable: true }
+
+	  , on, once, off, emit, methods, descriptors, base;
+
+	on = function (type, listener) {
+		var data;
+
+		callable(listener);
+
+		if (!hasOwnProperty.call(this, '__ee__')) {
+			data = descriptor.value = create(null);
+			defineProperty(this, '__ee__', descriptor);
+			descriptor.value = null;
+		} else {
+			data = this.__ee__;
+		}
+		if (!data[type]) data[type] = listener;
+		else if (typeof data[type] === 'object') data[type].push(listener);
+		else data[type] = [data[type], listener];
+
+		return this;
+	};
+
+	once = function (type, listener) {
+		var once, self;
+
+		callable(listener);
+		self = this;
+		on.call(this, type, once = function () {
+			off.call(self, type, once);
+			apply.call(listener, this, arguments);
+		});
+
+		once.__eeOnceListener__ = listener;
+		return this;
+	};
+
+	off = function (type, listener) {
+		var data, listeners, candidate, i;
+
+		callable(listener);
+
+		if (!hasOwnProperty.call(this, '__ee__')) return this;
+		data = this.__ee__;
+		if (!data[type]) return this;
+		listeners = data[type];
+
+		if (typeof listeners === 'object') {
+			for (i = 0; (candidate = listeners[i]); ++i) {
+				if ((candidate === listener) ||
+						(candidate.__eeOnceListener__ === listener)) {
+					if (listeners.length === 2) data[type] = listeners[i ? 0 : 1];
+					else listeners.splice(i, 1);
+				}
+			}
+		} else {
+			if ((listeners === listener) ||
+					(listeners.__eeOnceListener__ === listener)) {
+				delete data[type];
+			}
+		}
+
+		return this;
+	};
+
+	emit = function (type) {
+		var i, l, listener, listeners, args;
+
+		if (!hasOwnProperty.call(this, '__ee__')) return;
+		listeners = this.__ee__[type];
+		if (!listeners) return;
+
+		if (typeof listeners === 'object') {
+			l = arguments.length;
+			args = new Array(l - 1);
+			for (i = 1; i < l; ++i) args[i - 1] = arguments[i];
+
+			listeners = listeners.slice();
+			for (i = 0; (listener = listeners[i]); ++i) {
+				apply.call(listener, this, args);
+			}
+		} else {
+			switch (arguments.length) {
+			case 1:
+				call.call(listeners, this);
+				break;
+			case 2:
+				call.call(listeners, this, arguments[1]);
+				break;
+			case 3:
+				call.call(listeners, this, arguments[1], arguments[2]);
+				break;
+			default:
+				l = arguments.length;
+				args = new Array(l - 1);
+				for (i = 1; i < l; ++i) {
+					args[i - 1] = arguments[i];
+				}
+				apply.call(listeners, this, args);
+			}
+		}
+	};
+
+	methods = {
+		on: on,
+		once: once,
+		off: off,
+		emit: emit
+	};
+
+	descriptors = {
+		on: d(on),
+		once: d(once),
+		off: d(off),
+		emit: d(emit)
+	};
+
+	base = defineProperties({}, descriptors);
+
+	module.exports = exports = function (o) {
+		return (o == null) ? create(base) : defineProperties(Object(o), descriptors);
+	};
+	exports.methods = methods;
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var assign        = __webpack_require__(4)
+	  , normalizeOpts = __webpack_require__(11)
+	  , isCallable    = __webpack_require__(12)
+	  , contains      = __webpack_require__(13)
+
+	  , d;
+
+	d = module.exports = function (dscr, value/*, options*/) {
+		var c, e, w, options, desc;
+		if ((arguments.length < 2) || (typeof dscr !== 'string')) {
+			options = value;
+			value = dscr;
+			dscr = null;
+		} else {
+			options = arguments[2];
+		}
+		if (dscr == null) {
+			c = w = true;
+			e = false;
+		} else {
+			c = contains.call(dscr, 'c');
+			e = contains.call(dscr, 'e');
+			w = contains.call(dscr, 'w');
+		}
+
+		desc = { value: value, configurable: c, enumerable: e, writable: w };
+		return !options ? desc : assign(normalizeOpts(options), desc);
+	};
+
+	d.gs = function (dscr, get, set/*, options*/) {
+		var c, e, options, desc;
+		if (typeof dscr !== 'string') {
+			options = set;
+			set = get;
+			get = dscr;
+			dscr = null;
+		} else {
+			options = arguments[3];
+		}
+		if (get == null) {
+			get = undefined;
+		} else if (!isCallable(get)) {
+			options = get;
+			get = set = undefined;
+		} else if (set == null) {
+			set = undefined;
+		} else if (!isCallable(set)) {
+			options = set;
+			set = undefined;
+		}
+		if (dscr == null) {
+			c = true;
+			e = false;
+		} else {
+			c = contains.call(dscr, 'c');
+			e = contains.call(dscr, 'e');
+		}
+
+		desc = { get: get, set: set, configurable: c, enumerable: e };
+		return !options ? desc : assign(normalizeOpts(options), desc);
+	};
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(5)()
+		? Object.assign
+		: __webpack_require__(6);
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = function () {
+		var assign = Object.assign, obj;
+		if (typeof assign !== 'function') return false;
+		obj = { foo: 'raz' };
+		assign(obj, { bar: 'dwa' }, { trzy: 'trzy' });
+		return (obj.foo + obj.bar + obj.trzy) === 'razdwatrzy';
+	};
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var keys  = __webpack_require__(7)
+	  , value = __webpack_require__(10)
+
+	  , max = Math.max;
+
+	module.exports = function (dest, src/*, …srcn*/) {
+		var error, i, l = max(arguments.length, 2), assign;
+		dest = Object(value(dest));
+		assign = function (key) {
+			try { dest[key] = src[key]; } catch (e) {
+				if (!error) error = e;
+			}
+		};
+		for (i = 1; i < l; ++i) {
+			src = arguments[i];
+			keys(src).forEach(assign);
+		}
+		if (error !== undefined) throw error;
+		return dest;
+	};
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(8)()
+		? Object.keys
+		: __webpack_require__(9);
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = function () {
+		try {
+			Object.keys('primitive');
+			return true;
+		} catch (e) { return false; }
+	};
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var keys = Object.keys;
+
+	module.exports = function (object) {
+		return keys(object == null ? object : Object(object));
+	};
+
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = function (value) {
+		if (value == null) throw new TypeError("Cannot use null or undefined");
+		return value;
+	};
+
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var forEach = Array.prototype.forEach, create = Object.create;
+
+	var process = function (src, obj) {
+		var key;
+		for (key in src) obj[key] = src[key];
+	};
+
+	module.exports = function (options/*, …options*/) {
+		var result = create(null);
+		forEach.call(arguments, function (options) {
+			if (options == null) return;
+			process(Object(options), result);
+		});
+		return result;
+	};
+
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	// Deprecated
+
+	'use strict';
+
+	module.exports = function (obj) { return typeof obj === 'function'; };
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(14)()
+		? String.prototype.contains
+		: __webpack_require__(15);
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var str = 'razdwatrzy';
+
+	module.exports = function () {
+		if (typeof str.contains !== 'function') return false;
+		return ((str.contains('dwa') === true) && (str.contains('foo') === false));
+	};
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var indexOf = String.prototype.indexOf;
+
+	module.exports = function (searchString/*, position*/) {
+		return indexOf.call(this, searchString, arguments[1]) > -1;
+	};
+
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = function (fn) {
+		if (typeof fn !== 'function') throw new TypeError(fn + " is not a function");
+		return fn;
+	};
+
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	(function(window, factory) {
+		var lazySizes = factory(window, window.document);
+		window.lazySizes = lazySizes;
+		if(typeof module == 'object' && module.exports){
+			module.exports = lazySizes;
+		}
+	}(window, function l(window, document) {
+		'use strict';
+		/*jshint eqnull:true */
+		if(!document.getElementsByClassName){return;}
+
+		var lazySizesConfig;
+
+		var docElem = document.documentElement;
+
+		var Date = window.Date;
+
+		var supportPicture = window.HTMLPictureElement;
+
+		var _addEventListener = 'addEventListener';
+
+		var _getAttribute = 'getAttribute';
+
+		var addEventListener = window[_addEventListener];
+
+		var setTimeout = window.setTimeout;
+
+		var requestAnimationFrame = window.requestAnimationFrame || setTimeout;
+
+		var requestIdleCallback = window.requestIdleCallback;
+
+		var regPicture = /^picture$/i;
+
+		var loadEvents = ['load', 'error', 'lazyincluded', '_lazyloaded'];
+
+		var regClassCache = {};
+
+		var forEach = Array.prototype.forEach;
+
+		var hasClass = function(ele, cls) {
+			if(!regClassCache[cls]){
+				regClassCache[cls] = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+			}
+			return regClassCache[cls].test(ele[_getAttribute]('class') || '') && regClassCache[cls];
+		};
+
+		var addClass = function(ele, cls) {
+			if (!hasClass(ele, cls)){
+				ele.setAttribute('class', (ele[_getAttribute]('class') || '').trim() + ' ' + cls);
+			}
+		};
+
+		var removeClass = function(ele, cls) {
+			var reg;
+			if ((reg = hasClass(ele,cls))) {
+				ele.setAttribute('class', (ele[_getAttribute]('class') || '').replace(reg, ' '));
+			}
+		};
+
+		var addRemoveLoadEvents = function(dom, fn, add){
+			var action = add ? _addEventListener : 'removeEventListener';
+			if(add){
+				addRemoveLoadEvents(dom, fn);
+			}
+			loadEvents.forEach(function(evt){
+				dom[action](evt, fn);
+			});
+		};
+
+		var triggerEvent = function(elem, name, detail, noBubbles, noCancelable){
+			var event = document.createEvent('CustomEvent');
+
+			event.initCustomEvent(name, !noBubbles, !noCancelable, detail || {});
+
+			elem.dispatchEvent(event);
+			return event;
+		};
+
+		var updatePolyfill = function (el, full){
+			var polyfill;
+			if( !supportPicture && ( polyfill = (window.picturefill || lazySizesConfig.pf) ) ){
+				polyfill({reevaluate: true, elements: [el]});
+			} else if(full && full.src){
+				el.src = full.src;
+			}
+		};
+
+		var getCSS = function (elem, style){
+			return (getComputedStyle(elem, null) || {})[style];
+		};
+
+		var getWidth = function(elem, parent, width){
+			width = width || elem.offsetWidth;
+
+			while(width < lazySizesConfig.minSize && parent && !elem._lazysizesWidth){
+				width =  parent.offsetWidth;
+				parent = parent.parentNode;
+			}
+
+			return width;
+		};
+
+		var rAF = (function(){
+			var running, waiting;
+			var fns = [];
+
+			var run = function(){
+				var fn;
+				running = true;
+				waiting = false;
+				while(fns.length){
+					fn = fns.shift();
+					fn[0].apply(fn[1], fn[2]);
+				}
+				running = false;
+			};
+
+			return function(fn){
+				if(running){
+					fn.apply(this, arguments);
+				} else {
+					fns.push([fn, this, arguments]);
+
+					if(!waiting){
+						waiting = true;
+						(document.hidden ? setTimeout : requestAnimationFrame)(run);
+					}
+				}
+			};
+		})();
+
+		var rAFIt = function(fn, simple){
+			return simple ?
+				function() {
+					rAF(fn);
+				} :
+				function(){
+					var that = this;
+					var args = arguments;
+					rAF(function(){
+						fn.apply(that, args);
+					});
+				}
+			;
+		};
+
+		var throttle = function(fn){
+			var running;
+			var lastTime = 0;
+			var gDelay = 125;
+			var RIC_DEFAULT_TIMEOUT = 999;
+			var rICTimeout = RIC_DEFAULT_TIMEOUT;
+			var run = function(){
+				running = false;
+				lastTime = Date.now();
+				fn();
+			};
+			var idleCallback = requestIdleCallback ?
+				function(){
+					requestIdleCallback(run, {timeout: rICTimeout});
+					if(rICTimeout !== RIC_DEFAULT_TIMEOUT){
+						rICTimeout = RIC_DEFAULT_TIMEOUT;
+					}
+				}:
+				rAFIt(function(){
+					setTimeout(run);
+				}, true)
+			;
+
+			return function(isPriority){
+				var delay;
+				if((isPriority = isPriority === true)){
+					rICTimeout = 66;
+				}
+
+				if(running){
+					return;
+				}
+
+				running =  true;
+
+				delay = gDelay - (Date.now() - lastTime);
+
+				if(delay < 0){
+					delay = 0;
+				}
+
+				if(isPriority || (delay < 9 && requestIdleCallback)){
+					idleCallback();
+				} else {
+					setTimeout(idleCallback, delay);
+				}
+			};
+		};
+
+		//based on http://modernjavascript.blogspot.de/2013/08/building-better-debounce.html
+		var debounce = function(func) {
+			var timeout, timestamp;
+			var wait = 99;
+			var run = function(){
+				timeout = null;
+				func();
+			};
+			var later = function() {
+				var last = Date.now() - timestamp;
+
+				if (last < wait) {
+					setTimeout(later, wait - last);
+				} else {
+					(requestIdleCallback || run)(run);
+				}
+			};
+
+			return function() {
+				timestamp = Date.now();
+
+				if (!timeout) {
+					timeout = setTimeout(later, wait);
+				}
+			};
+		};
+
+
+		var loader = (function(){
+			var lazyloadElems, preloadElems, isCompleted, resetPreloadingTimer, loadMode, started;
+
+			var eLvW, elvH, eLtop, eLleft, eLright, eLbottom;
+
+			var defaultExpand, preloadExpand, hFac;
+
+			var regImg = /^img$/i;
+			var regIframe = /^iframe$/i;
+
+			var supportScroll = ('onscroll' in window) && !(/glebot/.test(navigator.userAgent));
+
+			var shrinkExpand = 0;
+			var currentExpand = 0;
+
+			var isLoading = 0;
+			var lowRuns = -1;
+
+			var resetPreloading = function(e){
+				isLoading--;
+				if(e && e.target){
+					addRemoveLoadEvents(e.target, resetPreloading);
+				}
+
+				if(!e || isLoading < 0 || !e.target){
+					isLoading = 0;
+				}
+			};
+
+			var isNestedVisible = function(elem, elemExpand){
+				var outerRect;
+				var parent = elem;
+				var visible = getCSS(document.body, 'visibility') == 'hidden' || getCSS(elem, 'visibility') != 'hidden';
+
+				eLtop -= elemExpand;
+				eLbottom += elemExpand;
+				eLleft -= elemExpand;
+				eLright += elemExpand;
+
+				while(visible && (parent = parent.offsetParent) && parent != document.body && parent != docElem){
+					visible = ((getCSS(parent, 'opacity') || 1) > 0);
+
+					if(visible && getCSS(parent, 'overflow') != 'visible'){
+						outerRect = parent.getBoundingClientRect();
+						visible = eLright > outerRect.left &&
+							eLleft < outerRect.right &&
+							eLbottom > outerRect.top - 1 &&
+							eLtop < outerRect.bottom + 1
+						;
+					}
+				}
+
+				return visible;
+			};
+
+			var checkElements = function() {
+				var eLlen, i, rect, autoLoadElem, loadedSomething, elemExpand, elemNegativeExpand, elemExpandVal, beforeExpandVal;
+
+				if((loadMode = lazySizesConfig.loadMode) && isLoading < 8 && (eLlen = lazyloadElems.length)){
+
+					i = 0;
+
+					lowRuns++;
+
+					if(preloadExpand == null){
+						if(!('expand' in lazySizesConfig)){
+							lazySizesConfig.expand = docElem.clientHeight > 500 && docElem.clientWidth > 500 ? 500 : 370;
+						}
+
+						defaultExpand = lazySizesConfig.expand;
+						preloadExpand = defaultExpand * lazySizesConfig.expFactor;
+					}
+
+					if(currentExpand < preloadExpand && isLoading < 1 && lowRuns > 2 && loadMode > 2 && !document.hidden){
+						currentExpand = preloadExpand;
+						lowRuns = 0;
+					} else if(loadMode > 1 && lowRuns > 1 && isLoading < 6){
+						currentExpand = defaultExpand;
+					} else {
+						currentExpand = shrinkExpand;
+					}
+
+					for(; i < eLlen; i++){
+
+						if(!lazyloadElems[i] || lazyloadElems[i]._lazyRace){continue;}
+
+						if(!supportScroll){unveilElement(lazyloadElems[i]);continue;}
+
+						if(!(elemExpandVal = lazyloadElems[i][_getAttribute]('data-expand')) || !(elemExpand = elemExpandVal * 1)){
+							elemExpand = currentExpand;
+						}
+
+						if(beforeExpandVal !== elemExpand){
+							eLvW = innerWidth + (elemExpand * hFac);
+							elvH = innerHeight + elemExpand;
+							elemNegativeExpand = elemExpand * -1;
+							beforeExpandVal = elemExpand;
+						}
+
+						rect = lazyloadElems[i].getBoundingClientRect();
+
+						if ((eLbottom = rect.bottom) >= elemNegativeExpand &&
+							(eLtop = rect.top) <= elvH &&
+							(eLright = rect.right) >= elemNegativeExpand * hFac &&
+							(eLleft = rect.left) <= eLvW &&
+							(eLbottom || eLright || eLleft || eLtop) &&
+							((isCompleted && isLoading < 3 && !elemExpandVal && (loadMode < 3 || lowRuns < 4)) || isNestedVisible(lazyloadElems[i], elemExpand))){
+							unveilElement(lazyloadElems[i]);
+							loadedSomething = true;
+							if(isLoading > 9){break;}
+						} else if(!loadedSomething && isCompleted && !autoLoadElem &&
+							isLoading < 4 && lowRuns < 4 && loadMode > 2 &&
+							(preloadElems[0] || lazySizesConfig.preloadAfterLoad) &&
+							(preloadElems[0] || (!elemExpandVal && ((eLbottom || eLright || eLleft || eLtop) || lazyloadElems[i][_getAttribute](lazySizesConfig.sizesAttr) != 'auto')))){
+							autoLoadElem = preloadElems[0] || lazyloadElems[i];
+						}
+					}
+
+					if(autoLoadElem && !loadedSomething){
+						unveilElement(autoLoadElem);
+					}
+				}
+			};
+
+			var throttledCheckElements = throttle(checkElements);
+
+			var switchLoadingClass = function(e){
+				addClass(e.target, lazySizesConfig.loadedClass);
+				removeClass(e.target, lazySizesConfig.loadingClass);
+				addRemoveLoadEvents(e.target, rafSwitchLoadingClass);
+			};
+			var rafedSwitchLoadingClass = rAFIt(switchLoadingClass);
+			var rafSwitchLoadingClass = function(e){
+				rafedSwitchLoadingClass({target: e.target});
+			};
+
+			var changeIframeSrc = function(elem, src){
+				try {
+					elem.contentWindow.location.replace(src);
+				} catch(e){
+					elem.src = src;
+				}
+			};
+
+			var handleSources = function(source){
+				var customMedia, parent;
+
+				var sourceSrcset = source[_getAttribute](lazySizesConfig.srcsetAttr);
+
+				if( (customMedia = lazySizesConfig.customMedia[source[_getAttribute]('data-media') || source[_getAttribute]('media')]) ){
+					source.setAttribute('media', customMedia);
+				}
+
+				if(sourceSrcset){
+					source.setAttribute('srcset', sourceSrcset);
+				}
+
+				//https://bugzilla.mozilla.org/show_bug.cgi?id=1170572
+				if(customMedia){
+					parent = source.parentNode;
+					parent.insertBefore(source.cloneNode(), source);
+					parent.removeChild(source);
+				}
+			};
+
+			var lazyUnveil = rAFIt(function (elem, detail, isAuto, sizes, isImg){
+				var src, srcset, parent, isPicture, event, firesLoad;
+
+				if(!(event = triggerEvent(elem, 'lazybeforeunveil', detail)).defaultPrevented){
+
+					if(sizes){
+						if(isAuto){
+							addClass(elem, lazySizesConfig.autosizesClass);
+						} else {
+							elem.setAttribute('sizes', sizes);
+						}
+					}
+
+					srcset = elem[_getAttribute](lazySizesConfig.srcsetAttr);
+					src = elem[_getAttribute](lazySizesConfig.srcAttr);
+
+					if(isImg) {
+						parent = elem.parentNode;
+						isPicture = parent && regPicture.test(parent.nodeName || '');
+					}
+
+					firesLoad = detail.firesLoad || (('src' in elem) && (srcset || src || isPicture));
+
+					event = {target: elem};
+
+					if(firesLoad){
+						addRemoveLoadEvents(elem, resetPreloading, true);
+						clearTimeout(resetPreloadingTimer);
+						resetPreloadingTimer = setTimeout(resetPreloading, 2500);
+
+						addClass(elem, lazySizesConfig.loadingClass);
+						addRemoveLoadEvents(elem, rafSwitchLoadingClass, true);
+					}
+
+					if(isPicture){
+						forEach.call(parent.getElementsByTagName('source'), handleSources);
+					}
+
+					if(srcset){
+						elem.setAttribute('srcset', srcset);
+					} else if(src && !isPicture){
+						if(regIframe.test(elem.nodeName)){
+							changeIframeSrc(elem, src);
+						} else {
+							elem.src = src;
+						}
+					}
+
+					if(srcset || isPicture){
+						updatePolyfill(elem, {src: src});
+					}
+				}
+
+				rAF(function(){
+					if(elem._lazyRace){
+						delete elem._lazyRace;
+					}
+					removeClass(elem, lazySizesConfig.lazyClass);
+
+					if( !firesLoad || elem.complete ){
+						if(firesLoad){
+							resetPreloading(event);
+						} else {
+							isLoading--;
+						}
+						switchLoadingClass(event);
+					}
+				});
+			});
+
+			var unveilElement = function (elem){
+				var detail;
+
+				var isImg = regImg.test(elem.nodeName);
+
+				//allow using sizes="auto", but don't use. it's invalid. Use data-sizes="auto" or a valid value for sizes instead (i.e.: sizes="80vw")
+				var sizes = isImg && (elem[_getAttribute](lazySizesConfig.sizesAttr) || elem[_getAttribute]('sizes'));
+				var isAuto = sizes == 'auto';
+
+				if( (isAuto || !isCompleted) && isImg && (elem.src || elem.srcset) && !elem.complete && !hasClass(elem, lazySizesConfig.errorClass)){return;}
+
+				detail = triggerEvent(elem, 'lazyunveilread').detail;
+
+				if(isAuto){
+					 autoSizer.updateElem(elem, true, elem.offsetWidth);
+				}
+
+				elem._lazyRace = true;
+				isLoading++;
+
+				lazyUnveil(elem, detail, isAuto, sizes, isImg);
+			};
+
+			var onload = function(){
+				if(isCompleted){return;}
+				if(Date.now() - started < 999){
+					setTimeout(onload, 999);
+					return;
+				}
+				var afterScroll = debounce(function(){
+					lazySizesConfig.loadMode = 3;
+					throttledCheckElements();
+				});
+
+				isCompleted = true;
+
+				lazySizesConfig.loadMode = 3;
+
+				throttledCheckElements();
+
+				addEventListener('scroll', function(){
+					if(lazySizesConfig.loadMode == 3){
+						lazySizesConfig.loadMode = 2;
+					}
+					afterScroll();
+				}, true);
+			};
+
+			return {
+				_: function(){
+					started = Date.now();
+
+					lazyloadElems = document.getElementsByClassName(lazySizesConfig.lazyClass);
+					preloadElems = document.getElementsByClassName(lazySizesConfig.lazyClass + ' ' + lazySizesConfig.preloadClass);
+					hFac = lazySizesConfig.hFac;
+
+					addEventListener('scroll', throttledCheckElements, true);
+
+					addEventListener('resize', throttledCheckElements, true);
+
+					if(window.MutationObserver){
+						new MutationObserver( throttledCheckElements ).observe( docElem, {childList: true, subtree: true, attributes: true} );
+					} else {
+						docElem[_addEventListener]('DOMNodeInserted', throttledCheckElements, true);
+						docElem[_addEventListener]('DOMAttrModified', throttledCheckElements, true);
+						setInterval(throttledCheckElements, 999);
+					}
+
+					addEventListener('hashchange', throttledCheckElements, true);
+
+					//, 'fullscreenchange'
+					['focus', 'mouseover', 'click', 'load', 'transitionend', 'animationend', 'webkitAnimationEnd'].forEach(function(name){
+						document[_addEventListener](name, throttledCheckElements, true);
+					});
+
+					if((/d$|^c/.test(document.readyState))){
+						onload();
+					} else {
+						addEventListener('load', onload);
+						document[_addEventListener]('DOMContentLoaded', throttledCheckElements);
+						setTimeout(onload, 20000);
+					}
+
+					throttledCheckElements(lazyloadElems.length > 0);
+				},
+				checkElems: throttledCheckElements,
+				unveil: unveilElement
+			};
+		})();
+
+
+		var autoSizer = (function(){
+			var autosizesElems;
+
+			var sizeElement = rAFIt(function(elem, parent, event, width){
+				var sources, i, len;
+				elem._lazysizesWidth = width;
+				width += 'px';
+
+				elem.setAttribute('sizes', width);
+
+				if(regPicture.test(parent.nodeName || '')){
+					sources = parent.getElementsByTagName('source');
+					for(i = 0, len = sources.length; i < len; i++){
+						sources[i].setAttribute('sizes', width);
+					}
+				}
+
+				if(!event.detail.dataAttr){
+					updatePolyfill(elem, event.detail);
+				}
+			});
+			var getSizeElement = function (elem, dataAttr, width){
+				var event;
+				var parent = elem.parentNode;
+
+				if(parent){
+					width = getWidth(elem, parent, width);
+					event = triggerEvent(elem, 'lazybeforesizes', {width: width, dataAttr: !!dataAttr});
+
+					if(!event.defaultPrevented){
+						width = event.detail.width;
+
+						if(width && width !== elem._lazysizesWidth){
+							sizeElement(elem, parent, event, width);
+						}
+					}
+				}
+			};
+
+			var updateElementsSizes = function(){
+				var i;
+				var len = autosizesElems.length;
+				if(len){
+					i = 0;
+
+					for(; i < len; i++){
+						getSizeElement(autosizesElems[i]);
+					}
+				}
+			};
+
+			var debouncedUpdateElementsSizes = debounce(updateElementsSizes);
+
+			return {
+				_: function(){
+					autosizesElems = document.getElementsByClassName(lazySizesConfig.autosizesClass);
+					addEventListener('resize', debouncedUpdateElementsSizes);
+				},
+				checkElems: debouncedUpdateElementsSizes,
+				updateElem: getSizeElement
+			};
+		})();
+
+		var init = function(){
+			if(!init.i){
+				init.i = true;
+				autoSizer._();
+				loader._();
+			}
+		};
+
+		(function(){
+			var prop;
+
+			var lazySizesDefaults = {
+				lazyClass: 'lazyload',
+				loadedClass: 'lazyloaded',
+				loadingClass: 'lazyloading',
+				preloadClass: 'lazypreload',
+				errorClass: 'lazyerror',
+				//strictClass: 'lazystrict',
+				autosizesClass: 'lazyautosizes',
+				srcAttr: 'data-src',
+				srcsetAttr: 'data-srcset',
+				sizesAttr: 'data-sizes',
+				//preloadAfterLoad: false,
+				minSize: 40,
+				customMedia: {},
+				init: true,
+				expFactor: 1.5,
+				hFac: 0.8,
+				loadMode: 2
+			};
+
+			lazySizesConfig = window.lazySizesConfig || window.lazysizesConfig || {};
+
+			for(prop in lazySizesDefaults){
+				if(!(prop in lazySizesConfig)){
+					lazySizesConfig[prop] = lazySizesDefaults[prop];
+				}
+			}
+
+			window.lazySizesConfig = lazySizesConfig;
+
+			setTimeout(function(){
+				if(lazySizesConfig.init){
+					init();
+				}
+			});
+		})();
+
+		return {
+			cfg: lazySizesConfig,
+			autoSizer: autoSizer,
+			loader: loader,
+			init: init,
+			uP: updatePolyfill,
+			aC: addClass,
+			rC: removeClass,
+			hC: hasClass,
+			fire: triggerEvent,
+			gW: getWidth,
+			rAF: rAF,
+		};
+	}
+	));
+
+
+/***/ }
+/******/ ]);
 //# sourceMappingURL=demo.js.map
