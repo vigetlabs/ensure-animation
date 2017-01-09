@@ -84,7 +84,7 @@
 	}
 
 	// example two
-	var e2_preloader = new _ensureAnimation2.default('#e2-preloader')[0];
+	new _ensureAnimation2.default('#e2-preloader');
 
 	// example three
 	var e3_preloader = new _ensureAnimation2.default('#e3-preloader')[0];
@@ -97,12 +97,10 @@
 	    var _this = this;
 
 	    if (this.readyState == 4 && this.status == 200) {
-	      (function () {
-	        var responseText = _this.responseText;
-	        e3_preloader.finish().then(function () {
-	          e3_content.innerHTML = responseText;
-	        });
-	      })();
+	      e3_preloader.finish().then(function () {
+	        e3_content.innerHTML = _this.responseText;
+	        e3_content.classList.add('fade-in');
+	      });
 	    }
 	  };
 	  xhttp.open('GET', 'https://static.viget.com/content.txt', true);
@@ -134,6 +132,9 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var emitter = (0, _eventEmitter2.default)({});
+	var matches = function matches(el, selector) {
+	  return (el.matches || el.matchesSelector || el.msMatchesSelector || el.mozMatchesSelector || el.webkitMatchesSelector || el.oMatchesSelector).call(el, selector);
+	};
 
 	var whichAnimationEvent = function whichAnimationEvent() {
 	  var el = document.createElement('fakeelement');
@@ -177,7 +178,7 @@
 	      var p = this.props;
 	      var finish = p.finish ? p.finish : this.el.getAttribute('data-ensure-finish-class') ? this.el.getAttribute('data-ensure-finish-class') : 'ensure-target-finished';
 	      var target = p.target ? p.target : this.el.getAttribute('data-ensure-target') ? document.querySelectorAll(this.el.getAttribute('data-ensure-target'))[0] : this.el;
-	      var until = p.until ? p.until : this.el.getAttribute('data-ensure-until') ? this.el.getAttribute('data-ensure-until') : 'ensure-animation-loaded';
+	      var until = p.until ? p.until : this.el.getAttribute('data-ensure-until') ? this.el.getAttribute('data-ensure-until') : '.ensure-animation-loaded';
 
 	      this.state = {
 	        finish: finish,
@@ -199,16 +200,16 @@
 	  }, {
 	    key: 'restart',
 	    value: function restart() {
-	      // Remove loaded classname
-	      var classList = this.el.classList;
+	      // Remove finished classname
+	      var elClassList = this.el.classList;
 	      var targetClassList = this.state.target.classList;
-	      targetClassList.remove(this.state.until);
+	      targetClassList.remove(this.state.finish);
 
 	      // Force redraw
-	      var classes = classList.toString().split(' ');
-	      classList.remove.apply(classList, _toConsumableArray(classes));
+	      var classes = elClassList.toString().split(' ');
+	      elClassList.remove.apply(elClassList, _toConsumableArray(classes));
 	      void this.el.offsetWidth;
-	      classList.add.apply(classList, _toConsumableArray(classes));
+	      elClassList.add.apply(elClassList, _toConsumableArray(classes));
 
 	      this.el.removeEventListener(animationEvent, this.checkReference, false);
 
@@ -238,9 +239,8 @@
 	  }, {
 	    key: 'continueChecking',
 	    value: function continueChecking() {
-	      // If it should run and not finished, keep checking for ending class
-	      var containsEndingClass = this.state.target.classList.contains(this.state.until);
-	      if (containsEndingClass) {
+	      // If it should run and not finished, keep checking for ending selector
+	      if (matches(this.state.target, this.state.until)) {
 	        this.stop();
 	        emitter.emit('finished');
 	      }

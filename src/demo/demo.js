@@ -27,7 +27,7 @@ for (let i = 0; i < e1_buttons.length; i++) {
 }
 
 // example two
-const e2_preloader = new EnsureAnimation('#e2-preloader')[0]
+new EnsureAnimation('#e2-preloader')
 
 // example three
 const e3_preloader = new EnsureAnimation('#e3-preloader')[0]
@@ -35,12 +35,12 @@ const e3_button    = document.querySelector('.e3-button')
 const e3_content   = document.querySelector('.e3-content')
 
 e3_button.addEventListener('click', function(){
-  var xhttp = new XMLHttpRequest()
+  const xhttp = new XMLHttpRequest()
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      let responseText = this.responseText
-      e3_preloader.finish().then(function(){
-        e3_content.innerHTML = responseText
+      e3_preloader.finish().then(() => {
+        e3_content.innerHTML = this.responseText
+        e3_content.classList.add('fade-in')
       })
     }
   }

@@ -1,5 +1,8 @@
 import ee from 'event-emitter'
-var emitter = ee({})
+const emitter = ee({})
+const matches = (el, selector) => {
+  return (el.matches || el.matchesSelector || el.msMatchesSelector || el.mozMatchesSelector || el.webkitMatchesSelector || el.oMatchesSelector).call(el, selector)
+}
 
 const whichAnimationEvent = () => {
   let el = document.createElement('fakeelement')
@@ -37,7 +40,7 @@ class Ensure {
     let p  = this.props
     let finish  = p.finish ? p.finish : (this.el.getAttribute('data-ensure-finish-class') ? this.el.getAttribute('data-ensure-finish-class') : 'ensure-target-finished')
     let target  = p.target ? p.target : (this.el.getAttribute('data-ensure-target') ? document.querySelectorAll(this.el.getAttribute('data-ensure-target'))[0] : this.el)
-    let until = p.until  ? p.until  : (this.el.getAttribute('data-ensure-until') ? this.el.getAttribute('data-ensure-until') : 'ensure-animation-loaded')
+    let until = p.until  ? p.until  : (this.el.getAttribute('data-ensure-until') ? this.el.getAttribute('data-ensure-until') : '.ensure-animation-loaded')
 
     this.state = {
       finish,
@@ -57,16 +60,16 @@ class Ensure {
   }
 
   restart() {
-    // Remove loaded classname
-    let classList = this.el.classList
+    // Remove finished classname
+    let elClassList     = this.el.classList
     let targetClassList = this.state.target.classList
-    targetClassList.remove(this.state.until)
+    targetClassList.remove(this.state.finish)
 
     // Force redraw
-    let classes = classList.toString().split(' ')
-    classList.remove(...classes)
+    let classes = elClassList.toString().split(' ')
+    elClassList.remove(...classes)
     void this.el.offsetWidth
-    classList.add(...classes)
+    elClassList.add(...classes)
 
     this.el.removeEventListener(animationEvent, this.checkReference, false)
 
@@ -91,9 +94,8 @@ class Ensure {
   }
 
   continueChecking() {
-    // If it should run and not finished, keep checking for ending class
-    let containsEndingClass = this.state.target.classList.contains(this.state.until)
-    if (containsEndingClass) {
+    // If it should run and not finished, keep checking for ending selector
+    if (matches(this.state.target, this.state.until)) {
       this.stop()
       emitter.emit('finished')
     }
