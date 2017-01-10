@@ -22,9 +22,9 @@ const whichAnimationEvent = () => {
 
 const animationEvent = whichAnimationEvent()
 const defaults = {
-  finish : null,
-  until  : null,
-  target : null
+  finishClass : null,
+  until       : null,
+  target      : null
 }
 
 class Ensure {
@@ -38,12 +38,12 @@ class Ensure {
 
   setup() {
     let p  = this.props
-    let finish  = p.finish ? p.finish : (this.el.getAttribute('data-ensure-finish-class') ? this.el.getAttribute('data-ensure-finish-class') : 'ensure-target-finished')
+    let finishClass  = p.finishClass ? p.finishClass : (this.el.getAttribute('data-ensure-finish-class') ? this.el.getAttribute('data-ensure-finish-class') : 'ensure-target-finished')
     let target  = p.target ? p.target : (this.el.getAttribute('data-ensure-target') ? document.querySelectorAll(this.el.getAttribute('data-ensure-target'))[0] : this.el)
     let until = p.until  ? p.until  : (this.el.getAttribute('data-ensure-until') ? this.el.getAttribute('data-ensure-until') : '.ensure-animation-loaded')
 
     this.state = {
-      finish,
+      finishClass,
       target,
       until,
     }
@@ -63,7 +63,7 @@ class Ensure {
     // Remove finished classname
     let elClassList     = this.el.classList
     let targetClassList = this.state.target.classList
-    targetClassList.remove(this.state.finish)
+    targetClassList.remove(this.state.finishClass)
 
     // Force redraw
     let classes = elClassList.toString().split(' ')
@@ -103,8 +103,8 @@ class Ensure {
     if ( ! this.shouldRun) {
       this.isFinished = true
 
-      if (this.state.finish) {
-        this.state.target.classList.add(this.state.finish)
+      if (this.state.finishClass) {
+        this.state.target.classList.add(this.state.finishClass)
       }
 
       if (this.isFinished) {
