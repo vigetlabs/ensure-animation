@@ -1,6 +1,6 @@
 {
   "name": "ensure-animation",
-  "version": "0.1.8",
+  "version": "0.1.9-beta",
   "description": "Ensuring animations run.",
   "main": "dist/ensure-animation/index.js",
   "scripts": {
