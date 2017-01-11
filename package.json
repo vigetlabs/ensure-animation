@@ -1,14 +1,14 @@
 {
   "name": "ensure-animation",
-  "version": "0.1.9-beta",
+  "version": "0.1.10-beta",
   "description": "Ensuring animations run.",
-  "main": "dist/ensure-animation/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "deploy": "NODE_ENV=production webpack src/demo/demo.js example/demo.js -p && npm run sass && gh-pages -d example -b gh-pages",
     "start": "webpack src/demo/demo.js example/demo.js & npm run sass && npm run watch",
     "sass": "node-sass src/demo/demo.sass example/demo.css -i",
     "watch": "node-sass src/demo/demo.sass example/demo.css -i -w & webpack src/demo/demo.js example/demo.js --watch & browser-sync start --server example --files 'example/*, index.html'",
-    "prepublish": "NODE_ENV=production rm -rf dist && babel src/ensure-animation -d dist/ensure-animation && webpack src/ensure-animation dist/ensure-animation/index.js -p --output-library-target var --output-library EnsureAnimation"
+    "prepublish": "NODE_ENV=production rm -rf dist && babel src/ensure-animation -d dist && webpack src/ensure-animation dist/ensure-animation.min.js -p --output-library-target var --output-library EnsureAnimation"
   },
   "repository": {
     "type": "git",
