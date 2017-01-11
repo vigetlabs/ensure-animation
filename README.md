@@ -20,7 +20,7 @@ Given the following markup:
 ```html
 <figure>
   <img src="large-image.jpg" class="hero lazyload">
-  <div class="preloader" data-ensure-target=".hero" data-ensure-until=".lazy-loaded" data-ensure-finish-class="fade-in"></div>
+  <div class="preloader" data-ensure-target=".hero" data-ensure-until=".lazyloaded" data-ensure-finish-class="fade-in"></div>
 </figure>
 ```
 Import EnsureAnimation for use in your JS:
@@ -29,7 +29,7 @@ import EnsureAnimation from 'ensure-animation'
 new EnsureAnimation('.preloader')
 ```
 
-## Multiple node instances
+## Get instances
 ```js
 const preloaders = new EnsureAnimation('.preloaders')
 ```
@@ -57,7 +57,7 @@ Options can be passed directly to an instance using data attributes on the node 
 <figure>
   <img src="large-image.jpg" class="hero lazyload">
   <div data-ensure-target=".hero"
-       data-ensure-until=".lazy-loaded"
+       data-ensure-until=".lazyloaded"
        data-ensure-finish-class="fade-in"
        class="preloader"></div>
 </figure>
