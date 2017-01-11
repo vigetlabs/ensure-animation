@@ -125,7 +125,7 @@ class Ensure {
   }
 }
 
-export default class EnsureAnimation {
+module.exports = class EnsureAnimation {
   constructor(selector, options) {
     const animations = document.querySelectorAll(selector)
     let instances = []
